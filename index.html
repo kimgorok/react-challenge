@@ -8,27 +8,19 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     const root = document.getElementById("root");
-    const Title = () => (
-      <h3 id="title" onMouseEnter={() => console.log("마우스 입장")}>
-        난 제목이야
-      </h3>
-    );
-    const Button = () => (
-      <button
-        style={{ backgroundColor: "tomato" }}
-        onClick={() => console.log("클릭됨")}
-      >
-        날 클릭해봐
-      </button>
-    );
 
-    const Container = () => (
-      <div>
-        <button>HTML</button>
-        <Title />
-        <Button />
-      </div>
-    );
-    ReactDOM.render(<Container />, root);
+    function App() {
+      const [counter, setCounter] = React.useState(0);
+      const onClick = () => {
+        setCounter(counter + 1);
+      };
+      return (
+        <div>
+          <h3>총 클릭 수 : {counter} </h3>
+          <button onClick={onClick}>클릭 미 </button>
+        </div>
+      );
+    }
+    ReactDOM.render(<App />, root);
   </script>
 </html>
