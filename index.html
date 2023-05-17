@@ -3,18 +3,7 @@
   <head>
     <title>Parcel Sandbox</title>
     <meta charset="UTF-8" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css"
-    />
-    <style>
-      body {
-        padding: 20px;
-      }
-      h1 {
-        text-align: center;
-      }
-    </style>
+    <link rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
@@ -23,83 +12,30 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function WriteNumber() {
-      const [firstNum, setFirstNum] = React.useState("");
-      const [secondNum, setSecondNum] = React.useState("");
-      const [result, setResult] = React.useState("");
-
-      const num1Change = (event) => {
-        setFirstNum(event.target.value);
-      };
-
-      const num2Change = (event) => {
-        setSecondNum(event.target.value);
-      };
-
-      const caculate = () => {
-        let cResult = 0;
-        switch (index) {
-          case "0":
-            cResult = Number(firstNum) + Number(secondNum);
-            break;
-          case "1":
-            cResult = Number(firstNum) - Number(secondNum);
-            break;
-          case "2":
-            cResult = Number(firstNum) / Number(secondNum);
-            break;
-          case "3":
-            cResult = Number(firstNum) * Number(secondNum);
-            break;
-        }
-        setResult(cResult);
-      };
-
-      const [index, setIndex] = React.useState("xx");
-
-      const onSelect = (event) => {
-        setIndex(event.target.value);
-      };
+    function Btn({ textProp, changeValueProp }) {
       return (
-        <div>
-          <div>
-            <input
-              value={firstNum}
-              placeholder="👉 Write a number..."
-              type="number"
-              onChange={num1Change}
-            />
-          </div>
-          <div>
-            <input
-              value={secondNum}
-              placeholder="👉 And another one..."
-              type="number"
-              onChange={num2Change}
-            />
-          </div>
-
-          <div>
-            <select value={index} onChange={onSelect}>
-              <option value="xx">Select opertaion </option>
-              <option value="0"> + </option>
-              <option value="1"> - </option>
-              <option value="2"> / </option>
-              <option value="3"> * </option>
-            </select>
-          </div>
-
-          <button onClick={caculate}>Calculate</button>
-          {result !== "" ? <h1>The result is : {result}</h1> : null}
-        </div>
+        <button
+          onClick={changeValueProp}
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+          }}
+        >
+          {textProp}
+        </button>
       );
     }
-
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes ");
       return (
-        <div className="container">
-          <h1>🔥 Calculator 🔥</h1>
-          <WriteNumber />
+        <div>
+          <MemorizedBtn textProp={value} changeValueProp={changeValue} />
+          <MemorizedBtn textProp="Continue" />
         </div>
       );
     }
