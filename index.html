@@ -1,5 +1,21 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css"
+    />
+    <style>
+      body {
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
   <body>
     <div id="root"></div>
   </body>
@@ -7,75 +23,86 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function MinutesToHours() {
-      const [amount, setAmount] = React.useState(0);
-      const [inverted, setInverted] = React.useState(false);
-      const onChange = (event) => {
-        setAmount(event.target.value);
-      };
-      const reset = () => setAmount(0);
-      const onInvert = () => {
-        reset();
-        setInverted((current) => !current);
-      };
-      return (
-        <div>
-          <div>
-            <label htmlFor="minutes">분</label>
-            <input
-              value={inverted ? amount * 60 : amount}
-              id="minutes"
-              placeholder="Minutes"
-              type="number"
-              onChange={onChange}
-              disabled={inverted}
-            />
-          </div>
-          <div>
-            <label htmlFor="hours">시</label>
-            <input
-              value={inverted ? amount : Math.round(amount / 60)}
-              id="hours"
-              placeholder="Hours"
-              type="number"
-              onChange={onChange}
-              disabled={!inverted}
-            />
-          </div>
-          <button onClick={reset}>리셋</button>
-          <button onClick={onInvert}>{inverted ? "원래대로" : "변환"} </button>
-        </div>
-      );
-    }
-    function KmToMiles() {
-      return <h3>KM 2 M </h3>;
-    }
+    function WriteNumber() {
+      const [firstNum, setFirstNum] = React.useState("");
+      const [secondNum, setSecondNum] = React.useState("");
+      const [result, setResult] = React.useState("");
 
-    function App() {
+      const num1Change = (event) => {
+        setFirstNum(event.target.value);
+      };
+
+      const num2Change = (event) => {
+        setSecondNum(event.target.value);
+      };
+
+      const caculate = () => {
+        let cResult = 0;
+        switch (index) {
+          case "0":
+            cResult = Number(firstNum) + Number(secondNum);
+            break;
+          case "1":
+            cResult = Number(firstNum) - Number(secondNum);
+            break;
+          case "2":
+            cResult = Number(firstNum) / Number(secondNum);
+            break;
+          case "3":
+            cResult = Number(firstNum) * Number(secondNum);
+            break;
+        }
+        setResult(cResult);
+      };
+
       const [index, setIndex] = React.useState("xx");
-      // useState값을 비워두면 아무것도 없이 시작함
+
       const onSelect = (event) => {
         setIndex(event.target.value);
       };
-      console.log("render w/", index);
       return (
         <div>
-          <h1>슈퍼 변환기</h1>
+          <div>
+            <input
+              value={firstNum}
+              placeholder="👉 Write a number..."
+              type="number"
+              onChange={num1Change}
+            />
+          </div>
+          <div>
+            <input
+              value={secondNum}
+              placeholder="👉 And another one..."
+              type="number"
+              onChange={num2Change}
+            />
+          </div>
 
-          <select value={index} onChange={onSelect}>
-            <option value="xx">Select your units </option>
+          <div>
+            <select value={index} onChange={onSelect}>
+              <option value="xx">Select opertaion </option>
+              <option value="0"> + </option>
+              <option value="1"> - </option>
+              <option value="2"> / </option>
+              <option value="3"> * </option>
+            </select>
+          </div>
 
-            <option value="0"> Minutes & Hours </option>
-            <option value="1"> Km & Miles </option>
-          </select>
-          <hr />
-          {index === "xx" ? "유닛을 고르시오" : null}
-          {index === "0" ? <MinutesToHours /> : null}
-          {index === "1" ? <KmToMiles /> : null}
+          <button onClick={caculate}>Calculate</button>
+          {result !== "" ? <h1>The result is : {result}</h1> : null}
         </div>
       );
     }
 
+    function App() {
+      return (
+        <div className="container">
+          <h1>🔥 Calculator 🔥</h1>
+          <WriteNumber />
+        </div>
+      );
+    }
     const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
