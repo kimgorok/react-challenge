@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
 
 function App() {
+  const [counter, setValue] = useState(0);
+  const [keyword, setKeyword] = useState("");
+  const onClick = () => setValue((prev) => prev + 1);
+  const onChange = (event) => setKeyword(event.target.value);
+
+  console.log("난 항상 실행돼");
+
+  useEffect(() => {
+    console.log("한번만 실행");
+  }, []);
+  useEffect(() => {
+    if (keyword !== "" && keyword.length > 5) {
+      console.log("검색", keyword);
+    }
+  }, [keyword]);
+  useEffect(() => {
+    console.log("카운터가 바뀜!");
+  }, [counter]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input
+        value={keyword}
+        onChange={onChange}
+        type="text"
+        placeholder="Search Here,,,,"
+      />
+      <h1>{counter}</h1>
+      <button onClick={onClick}>클릭</button>
     </div>
   );
 }
