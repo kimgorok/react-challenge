@@ -1,0 +1,23 @@
+.container {
+  margin: 10px;
+
+  color: rgb(216, 207, 207);
+  background: #aa0000;
+  display: grid;
+  box-sizing: border-box;
+}
+
+.header {
+  height: 100px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.card {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  padding: 10px;
+  grid-gap: 10px;
+}

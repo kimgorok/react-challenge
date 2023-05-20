@@ -1,0 +1,42 @@
+.header {
+  text-align: center;
+  background-color: white;
+}
+
+.dc_container {
+  display: grid;
+  grid-gap: 30px;
+  grid-auto-rows: minmax(100px, auto);
+  grid-template-areas:
+    "img name"
+    "img desc"
+    "img seri"
+    "more more";
+}
+
+.image {
+  grid-area: img;
+  height: 500px;
+  width: 500px;
+  margin: auto;
+}
+
+.cName {
+  grid-area: name;
+  font-size: 8rem;
+}
+
+.description {
+  grid-area: desc;
+  font-size: 2rem;
+}
+
+.series {
+  grid-area: seri;
+  font-size: 1.5rem;
+}
+
+.detail {
+  grid-area: more;
+  font-size: 1.5rem;
+}
