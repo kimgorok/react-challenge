@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import DetailCharater from "../components/DetailCharater";
-import styles from "../style/detail.module.css";
+
+import DetailCharater from "../components/DetailCharacter";
 
 function Detail() {
   const [character, setCharacter] = useState([]);
