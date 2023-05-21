@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import DetailCharater from "../components/DetailCharacter";
 
 function Detail() {
+  // character의 json정보를 가져와서 저장하는 useState
   const [character, setCharacter] = useState([]);
+  // 현재 URL의 id 매개변수를 추출하여 컴포넌트 내에서 사용할 수 있게 함
   const { id } = useParams();
   const getCharacter = async () => {
     const json = await (

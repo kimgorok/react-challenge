@@ -19,6 +19,7 @@ function DetailCharater({ img, name, description, series, urls }) {
         </p>
         <ul className={styles.series}>
           <h1>SERIES</h1>
+          {/* map으로 items의 각 요소를 새로 return함 */}
           {series.items.map((series) => (
             <li key={Math.random()}>{series.name}</li>
           ))}
@@ -36,6 +37,8 @@ function DetailCharater({ img, name, description, series, urls }) {
   );
 }
 
+// series의 속성은 객체이고, 그 안에 item은 배열, 그 안에 name은 문자열이다
+// urls의 속성은 배열이고, 내부에 type과 url은 객체 속성이다.
 DetailCharater.propTypes = {
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
